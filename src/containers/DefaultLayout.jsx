@@ -8,6 +8,7 @@ import echarts from 'echarts/lib/echarts'
 import avatar from '@/assets/images/user.jpg'
 import menu from './menu'
 import '@/style/layout.scss'
+import { post_logout } from '@/api/api'
 
 import AppHeader from './AppHeader.jsx'
 import AppAside from './AppAside.jsx'
@@ -33,9 +34,15 @@ class DefaultLayout extends Component {
     }
 
     loginOut = () => {
-        localStorage.clear()
-        this.props.history.push('/login')
-        message.success('登出成功!')
+        post_logout()
+            .then(res => {
+                localStorage.clear()
+                this.props.history.push('/login')
+                message.success('登出成功!')
+            })
+            .catch(err => {
+                message.error('系统错误!')
+            })
     }
     getMenu = menu => {
         let newMenu,

@@ -27,7 +27,7 @@ class Login extends Component {
                         password = RsaEncrypt(publicKey, password)
                         post_login({
                             data: { userName: username, passWord: password },
-                            headers: { 'No-Token': true, 'Content-Type': 'application/x-www-form-urlencoded' }
+                            headers: { 'No-Token': true }
                         })
                             .then(res => {
                                 const { data } = res

@@ -18,8 +18,13 @@ instance.interceptors.request.use(
         //设置基础URL
         config.baseURL = APP_API_URL
         // 将 token 添加到请求头
-        if (token) {
-            config.headers.Authorization = `Bearer ${token}`
+        console.log(config)
+        if (config.headers['No-Token'] === true) {
+            delete config.headers['No-Token']
+        } else {
+            if (token) {
+                config.headers.Authorization = `Bearer ${token}`
+            }
         }
         // 处理表单数据
         if (config.method === 'post') {
